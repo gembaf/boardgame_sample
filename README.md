@@ -1,2 +1,5 @@
-# bordgame_sample
-Javaを用いたボードゲームの例題
+# BoardGame Sample
+
+## About
+
+- Javaを用いたボードゲームの例題
