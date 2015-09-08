@@ -11,4 +11,3 @@ public class Sansan extends JApplet {
         setContentPane(board);
     }
 }
-
