@@ -2,6 +2,7 @@ package GameLib;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -10,7 +11,10 @@ import javax.swing.JPanel;
 public class Cell extends JPanel implements MouseListener {
     private Stone stone = null;
 
-    public Cell() {
+    private Point point;
+
+    public Cell(int x, int y) {
+        point = new Point(x, y);
         setBackground(Color.GREEN);
         addMouseListener(this);
     }
@@ -27,6 +31,7 @@ public class Cell extends JPanel implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         stone = new Stone();
+        _callbacks.callbackMethod(point.x, point.y);
         repaint();
     }
 
@@ -41,4 +46,16 @@ public class Cell extends JPanel implements MouseListener {
 
     @Override
     public void mouseExited(MouseEvent e) {}
+
+    //--- コールバックメソッドの定義
+
+    public interface Callbacks {
+        public void callbackMethod(int x, int y);
+    }
+
+    private Callbacks _callbacks;
+
+    public void setCallbacks(Callbacks callbacks) {
+        _callbacks = callbacks;
+    }
 }
