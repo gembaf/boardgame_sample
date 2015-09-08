@@ -11,6 +11,9 @@ public class Board extends JPanel implements Cell.Callbacks {
 
     private Cell[][] cells = new Cell[SIZE][SIZE];
 
+    private Player player1 = new Player(Color.BLACK);
+    private Player player2 = new Player(Color.WHITE);
+    private boolean who = true;
 
     public Board() {
         setBackground(Color.BLACK);
@@ -32,6 +35,11 @@ public class Board extends JPanel implements Cell.Callbacks {
 
     @Override
     public void callbackMethod(int x, int y) {
-        System.out.println(x + " " + y);
+        if (who) {
+            cells[x][y].put(player1.getStone());
+        } else {
+            cells[x][y].put(player2.getStone());
+        }
+        who = !who;
     }
 }

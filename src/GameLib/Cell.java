@@ -9,7 +9,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JPanel;
 
 public class Cell extends JPanel implements MouseListener {
-    private Stone stone = null;
+    private Stone stone;
 
     private Point point;
 
@@ -19,20 +19,23 @@ public class Cell extends JPanel implements MouseListener {
         addMouseListener(this);
     }
 
+    public void put(Stone stone) {
+        this.stone = stone;
+        repaint();
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (stone != null) {
-            g.setColor(Color.RED);
+            g.setColor(stone.getColor());
             g.fillOval(3, 3, 90, 90);
         }
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        stone = new Stone();
         _callbacks.callbackMethod(point.x, point.y);
-        repaint();
     }
 
     @Override

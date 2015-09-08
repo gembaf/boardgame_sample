@@ -1,10 +1,15 @@
 package GameLib;
 
-import java.awt.Point;
+import java.awt.Color;
 
 public class Player {
-    private Point hand;
+    private Stone stone;
 
-    public Player() {
+    public Player(Color color) {
+        stone = new Stone(color);
+    }
+
+    public Stone getStone() {
+        return stone;
     }
 }
