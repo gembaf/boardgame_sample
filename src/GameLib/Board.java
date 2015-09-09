@@ -11,10 +11,6 @@ public class Board extends JPanel implements Cell.Callbacks {
 
     private Cell[][] cells = new Cell[SIZE][SIZE];
 
-    private Player player1 = new Player(Color.BLACK);
-    private Player player2 = new Player(Color.WHITE);
-    private boolean who = true;
-
     public Board() {
         setBackground(Color.BLACK);
         setLayout(new GridLayout(SIZE, SIZE, GAP, GAP));
@@ -31,18 +27,26 @@ public class Board extends JPanel implements Cell.Callbacks {
         }
     }
 
+    public boolean put(int x, int y, Stone stone) {
+        return cells[x][y].put(stone);
+    }
+
     //--- コールバックの処理
 
     @Override
     public void callbackMethod(int x, int y) {
-        boolean flag = false;
-        if (who) {
-            flag = cells[x][y].put(player1.getStone());
-        } else {
-            flag = cells[x][y].put(player2.getStone());
-        }
-        if (flag) {
-            who = !who;
-        }
+        _callbacks.callbackMethod(x, y);
+    }
+
+    //--- コールバックメソッドの定義
+
+    public interface Callbacks {
+        public void callbackMethod(int x, int y);
+    }
+
+    private Callbacks _callbacks;
+
+    public void setCallbacks(Callbacks callbacks) {
+        _callbacks = callbacks;
     }
 }
