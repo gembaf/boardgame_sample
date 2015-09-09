@@ -19,9 +19,11 @@ public class Cell extends JPanel implements MouseListener {
         addMouseListener(this);
     }
 
-    public void put(Stone stone) {
+    public boolean put(Stone stone) {
+        if (this.stone != null) { return false; }
         this.stone = stone;
         repaint();
+        return true;
     }
 
     @Override

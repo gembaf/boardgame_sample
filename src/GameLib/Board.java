@@ -35,11 +35,14 @@ public class Board extends JPanel implements Cell.Callbacks {
 
     @Override
     public void callbackMethod(int x, int y) {
+        boolean flag = false;
         if (who) {
-            cells[x][y].put(player1.getStone());
+            flag = cells[x][y].put(player1.getStone());
         } else {
-            cells[x][y].put(player2.getStone());
+            flag = cells[x][y].put(player2.getStone());
         }
-        who = !who;
+        if (flag) {
+            who = !who;
+        }
     }
 }
