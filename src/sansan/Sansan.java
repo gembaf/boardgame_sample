@@ -1,23 +1,20 @@
 package sansan;
 
-import java.awt.Color;
-
 import javax.swing.JApplet;
 
 import GameLib.Board;
 import GameLib.Player;
+import GameLib.PlayerList;
 
 public class Sansan extends JApplet implements Board.Callbacks {
     private Board board;
 
-    private Player player1 = new Player(Color.BLACK);
-    private Player player2 = new Player(Color.WHITE);
-    private boolean who = true;
+    private PlayerList playerList = new PlayerList();
 
     @Override
     public void init() {
         board = new Board();
-        board.setCallbacks(this);;
+        board.setCallbacks(this);
         setContentPane(board);
     }
 
@@ -25,14 +22,10 @@ public class Sansan extends JApplet implements Board.Callbacks {
 
     @Override
     public void callbackMethod(int x, int y) {
-        boolean flag = false;
-        if (who) {
-            flag = board.put(x, y, player1.getStone());
-        } else {
-            flag = board.put(x, y, player2.getStone());
-        }
+        Player player = playerList.currentPlayer();
+        boolean flag = board.put(x, y, player.getStone());
         if (flag) {
-            who = !who;
+            playerList.next();
         }
     }
 }
