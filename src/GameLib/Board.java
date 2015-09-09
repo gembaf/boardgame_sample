@@ -11,6 +11,8 @@ public class Board extends JPanel implements Cell.Callbacks {
 
     private Cell[][] cells = new Cell[SIZE][SIZE];
 
+    private boolean locked = false;
+
     public Board() {
         setBackground(Color.BLACK);
         setLayout(new GridLayout(SIZE, SIZE, GAP, GAP));
@@ -28,7 +30,47 @@ public class Board extends JPanel implements Cell.Callbacks {
     }
 
     public boolean put(int x, int y, Stone stone) {
+        if (locked) { return false; }
         return cells[x][y].put(stone);
+    }
+
+    public boolean isFinish(Stone stone) {
+        //----  横方向の三連チェック
+        for (int k1 = 0; k1 < SIZE; k1++) {
+            boolean flag = true;
+            for (int k2 = 0; k2 < SIZE; k2++) {
+                if (!cells[k1][k2].is_put(stone)) {
+                    flag = false;
+                }
+            }
+            if (flag) { return true; }
+        }
+
+        //----  縦方向の三連チェック
+        for (int k1 = 0; k1 < SIZE; k1++) {
+            boolean flag = true;
+            for (int k2 = 0; k2 < SIZE; k2++) {
+                if (!cells[k2][k1].is_put(stone)) {
+                    flag = false;
+                }
+            }
+            if (flag) { return true; }
+        }
+
+        //----  左上から右下への三連チェック
+        if (cells[0][0].is_put(stone)
+                && cells[1][1].is_put(stone)
+                && cells[2][2].is_put(stone) ) { return true; }
+
+        //----  右上から左下への三連チェック
+        if (cells[0][2].is_put(stone)
+                && cells[1][1].is_put(stone)
+                && cells[2][0].is_put(stone)) { return true;}
+        return false;
+    }
+
+    public void lock() {
+        locked = true;
     }
 
     //--- コールバックの処理

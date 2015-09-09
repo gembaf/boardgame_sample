@@ -13,4 +13,8 @@ public class Stone {
     public Color getColor() {
         return color;
     }
+
+    public boolean eqColor(Stone stone) {
+        return color == stone.getColor();
+    }
 }

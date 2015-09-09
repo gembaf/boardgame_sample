@@ -24,6 +24,12 @@ public class Sansan extends JApplet implements Board.Callbacks {
     public void callbackMethod(int x, int y) {
         Player player = playerList.currentPlayer();
         boolean flag = board.put(x, y, player.getStone());
+
+        if (board.isFinish(player.getStone())) {
+            System.out.println(player);
+            board.lock();
+        }
+
         if (flag) {
             playerList.next();
         }

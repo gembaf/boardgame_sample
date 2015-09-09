@@ -26,6 +26,11 @@ public class Cell extends JPanel implements MouseListener {
         return true;
     }
 
+    public boolean is_put(Stone stone) {
+        if (this.stone == null) { return false; }
+        return this.stone.eqColor(stone);
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
