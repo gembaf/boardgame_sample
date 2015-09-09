@@ -1,4 +1,4 @@
-package GameLib;
+package game;
 
 import java.awt.Color;
 import java.util.ArrayList;

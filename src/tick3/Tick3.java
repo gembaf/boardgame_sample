@@ -1,12 +1,12 @@
-package sansan;
+package tick3;
+
+import game.Board;
+import game.Player;
+import game.PlayerList;
 
 import javax.swing.JApplet;
 
-import GameLib.Board;
-import GameLib.Player;
-import GameLib.PlayerList;
-
-public class Sansan extends JApplet implements Board.Callbacks {
+public class Tick3 extends JApplet implements Board.Callbacks {
     private Board board;
 
     private PlayerList playerList = new PlayerList();
