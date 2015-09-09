@@ -1,6 +1,8 @@
-package game;
+package gui;
 
-import java.awt.Color;
+import game.ICell;
+import game.Stone;
+
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
@@ -8,14 +10,12 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 
-public class Cell extends JPanel implements MouseListener {
-    private Stone stone;
+public abstract class CellPanel extends JPanel implements MouseListener, ICell {
+    protected Stone stone;
+    protected Point point;
 
-    private Point point;
-
-    public Cell(int x, int y) {
+    public CellPanel(int x, int y) {
         point = new Point(x, y);
-        setBackground(Color.GREEN);
         addMouseListener(this);
     }
 
@@ -26,7 +26,7 @@ public class Cell extends JPanel implements MouseListener {
         return true;
     }
 
-    public boolean is_put(Stone stone) {
+    public boolean isPut(Stone stone) {
         if (this.stone == null) { return false; }
         return this.stone.eqColor(stone);
     }
@@ -41,9 +41,7 @@ public class Cell extends JPanel implements MouseListener {
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
-        _callbacks.callbackMethod(point.x, point.y);
-    }
+    public void mouseClicked(MouseEvent e) {}
 
     @Override
     public void mousePressed(MouseEvent e) {}
@@ -59,13 +57,9 @@ public class Cell extends JPanel implements MouseListener {
 
     //--- コールバックメソッドの定義
 
-    public interface Callbacks {
-        public void callbackMethod(int x, int y);
-    }
+    protected ICell.Callbacks _callbacks;
 
-    private Callbacks _callbacks;
-
-    public void setCallbacks(Callbacks callbacks) {
+    public void setCallbacks(ICell.Callbacks callbacks) {
         _callbacks = callbacks;
     }
 }
