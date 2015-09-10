@@ -1,19 +1,19 @@
 package tick3;
 
-import game.Board;
+import game.IBoard;
 import game.Player;
 import game.PlayerList;
 
 import javax.swing.JApplet;
 
-public class Tick3 extends JApplet implements Board.Callbacks {
-    private Board board;
+public class Tick3 extends JApplet implements IBoard.Callbacks {
+    private Tick3BoardPanel board;
 
     private PlayerList playerList = new PlayerList();
 
     @Override
     public void init() {
-        board = new Board();
+        board = new Tick3BoardPanel();
         board.setCallbacks(this);
         setContentPane(board);
     }
