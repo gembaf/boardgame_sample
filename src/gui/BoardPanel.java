@@ -9,30 +9,17 @@ import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 
-import tick3.Tick3CellPanel;
-
 public abstract class BoardPanel extends JPanel implements IBoard, ICell.Callbacks {
-    protected static final int SIZE = 3;
-    protected static final int GAP = 3;
+    protected int size;
 
-    protected Tick3CellPanel[][] cells = new Tick3CellPanel[SIZE][SIZE];
+    protected CellPanel[][] cells;
 
     protected boolean locked = false;
 
-    public BoardPanel() {
+    public BoardPanel(int size, int gap) {
+        this.size = size;
         setBackground(Color.BLACK);
-        setLayout(new GridLayout(SIZE, SIZE, GAP, GAP));
-        initBoard();
-    }
-
-    private void initBoard() {
-        for (int k1 = 0; k1 < SIZE; k1++) {
-            for (int k2 = 0; k2 < SIZE; k2++) {
-                cells[k1][k2] = new Tick3CellPanel(k1, k2);
-                cells[k1][k2].setCallbacks(this);
-                add(cells[k1][k2]);
-            }
-        }
+        setLayout(new GridLayout(size, size, gap, gap));
     }
 
     @Override

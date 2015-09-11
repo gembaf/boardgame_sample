@@ -4,6 +4,25 @@ import game.Stone;
 import gui.BoardPanel;
 
 public class Tick3BoardPanel extends BoardPanel {
+    private static final int SIZE = 3;
+    private static final int GAP = 3;
+
+    public Tick3BoardPanel() {
+        super(SIZE, GAP);
+        cells = new Tick3CellPanel[SIZE][SIZE];
+        initBoard();
+    }
+
+    private void initBoard() {
+        for (int k1 = 0; k1 < this.size; k1++) {
+            for (int k2 = 0; k2 < this.size; k2++) {
+                cells[k1][k2] = new Tick3CellPanel(k1, k2);
+                cells[k1][k2].setCallbacks(this);
+                add(cells[k1][k2]);
+            }
+        }
+    }
+
     @Override
     public boolean isFinish(Stone stone) {
         //----  横方向の三連チェック
@@ -39,5 +58,4 @@ public class Tick3BoardPanel extends BoardPanel {
                 && cells[2][0].isPut(stone)) { return true;}
         return false;
     }
-
 }
