@@ -1,6 +1,5 @@
 package game;
 
-import java.awt.Color;
 import java.util.ArrayList;
 
 public class PlayerList extends ArrayList<Player> {
@@ -10,8 +9,6 @@ public class PlayerList extends ArrayList<Player> {
 
     public PlayerList() {
         super(NUM);
-        add(new Player(Color.BLACK));
-        add(new Player(Color.WHITE));
     }
 
     public Player currentPlayer() {

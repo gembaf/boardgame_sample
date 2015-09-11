@@ -1,12 +1,11 @@
 package game;
 
-import java.awt.Color;
 
 public class Player {
     private Stone stone;
 
-    public Player(Color color) {
-        stone = new Stone(color);
+    public Player(Stone stone) {
+        this.stone = stone;
     }
 
     public Stone getStone() {
