@@ -6,12 +6,4 @@ public interface IBoard {
     public boolean isFinish(Stone stone);
 
     public void lock();
-
-    public void callbackMethod(int x, int y);
-
-    public interface Callbacks {
-        public void callbackMethod(int x, int y);
-    }
-
-    public void setCallbacks(Callbacks callbacks);
 }

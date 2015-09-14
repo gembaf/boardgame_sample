@@ -1,7 +1,6 @@
 package gui;
 
 import game.IBoard;
-import game.ICell;
 import game.Stone;
 
 import java.awt.Color;
@@ -9,12 +8,14 @@ import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 
-public abstract class BoardPanel extends JPanel implements IBoard, ICell.Callbacks {
+public abstract class BoardPanel extends JPanel implements IBoard, ISelectEvent {
     protected int size;
 
     protected CellPanel[][] cells;
 
     protected boolean locked = false;
+
+    protected ISelectEvent listener = null;
 
     public BoardPanel(int size, int gap) {
         this.size = size;
@@ -36,15 +37,15 @@ public abstract class BoardPanel extends JPanel implements IBoard, ICell.Callbac
         locked = true;
     }
 
-    protected IBoard.Callbacks _callbacks;
-
-    @Override
-    public void callbackMethod(int x, int y) {
-        _callbacks.callbackMethod(x, y);
+    public void addSelectListener(ISelectEvent listener) {
+        this.listener = listener;
     }
 
-    @Override
-    public void setCallbacks(IBoard.Callbacks callbacks) {
-        _callbacks = callbacks;
+    public void removeSelectListener() {
+        this.listener = null;
+    }
+
+    public void onSelect(int x, int y) {
+        listener.onSelect(x, y);
     }
 }

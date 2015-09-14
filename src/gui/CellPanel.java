@@ -14,6 +14,8 @@ public abstract class CellPanel extends JPanel implements MouseListener, ICell {
     protected Stone stone;
     protected Point point;
 
+    protected ISelectEvent listener = null;
+
     public CellPanel(int x, int y) {
         point = new Point(x, y);
         addMouseListener(this);
@@ -40,6 +42,14 @@ public abstract class CellPanel extends JPanel implements MouseListener, ICell {
         }
     }
 
+    public void addSelectListener(ISelectEvent listener) {
+        this.listener = listener;
+    }
+
+    public void removeSelectListener() {
+        this.listener = null;
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {}
 
@@ -54,12 +64,4 @@ public abstract class CellPanel extends JPanel implements MouseListener, ICell {
 
     @Override
     public void mouseExited(MouseEvent e) {}
-
-    //--- コールバックメソッドの定義
-
-    protected ICell.Callbacks _callbacks;
-
-    public void setCallbacks(ICell.Callbacks callbacks) {
-        _callbacks = callbacks;
-    }
 }

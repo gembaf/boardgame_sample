@@ -12,7 +12,7 @@ public class Tick3 extends GamePanel {
         playerList.add(new Player(Stone.BlackStone()));
         playerList.add(new Player(Stone.WhiteStone()));
         board = new Tick3BoardPanel();
-        board.setCallbacks(this);
+        board.addSelectListener(this);
         setContentPane(board);
     }
 }

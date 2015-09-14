@@ -13,6 +13,6 @@ public class Tick3CellPanel extends CellPanel {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        _callbacks.callbackMethod(point.x, point.y);
+        listener.onSelect(point.x, point.y);
     }
 }

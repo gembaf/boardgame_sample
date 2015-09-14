@@ -17,7 +17,7 @@ public class Tick3BoardPanel extends BoardPanel {
         for (int k1 = 0; k1 < this.size; k1++) {
             for (int k2 = 0; k2 < this.size; k2++) {
                 cells[k1][k2] = new Tick3CellPanel(k1, k2);
-                cells[k1][k2].setCallbacks(this);
+                cells[k1][k2].addSelectListener(this);
                 add(cells[k1][k2]);
             }
         }
